@@ -1,0 +1,58 @@
+name: Unified Release - Polls Types
+env:
+  NODE_VERSION: "16"
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - 'polls-be-types/**'
+      - 'polls-response-types/**'
+  workflow_dispatch:
+    inputs:
+      repository:
+        description: 'Repository to release (polls-be-types or polls-response-types)'
+        required: true
+        default: 'both'
+        type: choice
+        options:
+          - polls-be-types
+          - polls-response-types
+          - both
+
+jobs:
+  release-polls:
+    runs-on: kubernetes
+    if: github.event.inputs.repository == 'polls-be-types' || github.event.inputs.repository == 'both' || (github.event_name == 'push' && contains(github.event.head_commit.modified, 'polls-be-types/'))
+    steps:
+      - name: Check out repository code
+        uses: actions/checkout@v4
+
+      - name: Set node version to ${{ env.NODE_VERSION }}
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          registry-url: https://npm.pkg.github.com/
+          scope: "@simpplr"
+
+      - name: Set .npmrc
+        run: mv polls-be-types/.npmrc.example polls-be-types/.npmrc && sed -i 's/AUTH_TOKEN/${{secrets.SIMPPLR_TOKEN }}/' polls-be-types/.npmrc
+
+      - name: Install dependencies for polls-be-types
+        working-directory: ./polls-be-types
+        run: npm i
+
+      - name: Publish polls-be-types docs
+        working-directory: ./polls-be-types
+        run: |
+          npm install
+          npm run build:docs
+          npx gh-pages -d dist -s api.json -e services/polls-be/ -r "https://x-simpplr-token:${{ secrets.SIMPPLR_TOKEN }}@github.com/Simpplr/docs.git" --branch main --user 'Simpplr Polls BE Types / Release Action <release@polls-be-types>' -m 'Updated polls BE types docs'
+
+      - name: Release polls-be-types
+        working-directory: ./polls-be-types
+        run: npm run semantic-release
+        env:
+          GITHUB_TOKEN: ${{ secrets.SIMPPLR_TOKEN }}
+          NPM_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}

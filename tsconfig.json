@@ -1,0 +1,38 @@
+{
+    "compilerOptions": {
+      "noImplicitAny": true,
+      "useDefineForClassFields": true,
+      "allowJs": false,
+      "skipLibCheck": true,
+      "esModuleInterop": true,
+      "allowSyntheticDefaultImports": true,
+      "strict": true,
+      "forceConsistentCasingInFileNames": true,
+      "module": "CommonJS",
+      "moduleResolution": "Node",
+      "resolveJsonModule": true,
+      "isolatedModules": true,
+      "declaration": true,
+      "target": "es2015", // or a more recent ecmascript version
+      "experimentalDecorators": true,
+      "emitDecoratorMetadata": true,
+
+      "outDir": "./dist"
+    },
+    "include": [
+      "./api.ts",
+      "./polls-be/src/**/*.ts",
+      "./polls-response/src/**/*.ts"
+    ],
+    "exclude": [
+      "./node_modules",
+      "**/*.test.ts"
+    ],
+    "ts-node": {
+      "compilerOptions": {
+        "module": "commonjs",
+        "isolatedModules": false,
+        "strict": false
+      }
+    }
+  }

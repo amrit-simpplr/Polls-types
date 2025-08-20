@@ -1,0 +1,52 @@
+{
+  "name": "polls-types",
+  "version": "1.0.0",
+  "description": "Unified repository for Polls Backend Types and Polls Response Types",
+  "private": true,
+  "workspaces": [
+    "polls-be-types",
+    "polls-response-types"
+  ],
+  "scripts": {
+    "build": "tsc -p tsconfig.json",
+    "build:docs": "npm run generate && npx @redocly/cli build-docs ./dist/api.json && mv redoc-static.html ./dist/index.html",
+    "semantic-release": "semantic-release",
+    "test": "echo 'no tests'",
+    "docs": "spot docs api.ts",
+    "lint": "eslint --ext ts api.ts polls-be/src polls-response/src",
+    "validate": "spot validate api.ts",
+    "generate": "spot generate --contract api.ts --generator openapi3 --language json --out ./dist"
+  },
+  "dependencies": {
+    "@airtasker/spot": "^1.13.0",
+    "@commitlint/config-conventional": "^16.2.1",
+    "@semantic-release/git": "^10.0.1",
+    "@semantic-release/github": "^8.0.4",
+    "luxon": "^3.4.4",
+    "semantic-release": "^19.0.3"
+  },
+  "devDependencies": {
+    "@types/luxon": "^3.4.2",
+    "@typescript-eslint/eslint-plugin": "^7.4.0",
+    "@typescript-eslint/parser": "^7.4.0",
+    "eslint": "^8.57.0",
+    "typescript": "^5.3.3"
+  },
+  "publishConfig": {
+    "access": "restricted",
+    "registry": "https://npm.pkg.github.com/"
+  },
+  "keywords": [
+    "polls",
+    "types",
+    "typescript",
+    "api",
+    "simpplr",
+    "monorepo"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Simpplr/Polls-types.git"
+  }
+}
+  
