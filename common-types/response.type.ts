@@ -1,3 +1,6 @@
+// Common Response Types - Consolidated from polls-be and polls-response
+// This file contains types that are duplicated across both repositories
+
 import { Response } from "express";
 
 export interface ResponseHelper {

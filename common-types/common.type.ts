@@ -1,3 +1,6 @@
+// Common Types - Consolidated from polls-be and polls-response
+// This file contains types that are duplicated across both repositories
+
 export const enum ErrorCode {
   GENERAL_ERROR = 100,
   DATABASE_ERROR = 200,
@@ -19,6 +22,7 @@ export const enum ErrorCode {
   IN_USE_THEME_CANNOT_BE_DELETED = 1030,
   IN_USE_THEME_CANNOT_BE_DISABLED = 1031,
   DEFAULT_THEME_CANNOT_BE_DELETED = 1040,
+  AI_RESPONSE_ERROR = 1050,
 }
 
 export const enum HttpStatusCode {
@@ -37,4 +41,17 @@ export type Pagination = {
   nextCursor?: number;
   page: number;
   pageSize: number;
+};
+
+// Additional types from polls-be that are not in polls-response
+export type SearchUsersOptions = {
+  size: number;
+  audienceId?: string | null;
+  siteId?: string | null;
+  userIds?: string[];
+  responseFields?: Array<
+    "address" | "work_info" | "permissions" | "user_roles" | "manager"
+  >;
+  type?: "managers" | "members" | "followers" | null;
+  nextPageToken?: string | number | null;
 };

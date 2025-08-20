@@ -3,7 +3,6 @@
   "version": "1.0.0",
   "description": "Unified repository for Polls Backend Types and Polls Response Types",
   "main": "./index.ts",
-  "type": "module",
   "scripts": {
     "build": "tsc -p tsconfig.json",
     "build:docs": "npm run generate && npx @redocly/cli build-docs ./dist/api.json && mv redoc-static.html ./dist/index.html",
@@ -19,18 +18,19 @@
     "@commitlint/config-conventional": "^16.2.1",
     "@semantic-release/git": "^10.0.1",
     "@semantic-release/github": "^8.0.4",
+    "@simpplr/polls-db-shared-npm": "^1.22.7",
     "express": "^4.19.2",
     "luxon": "^3.4.4",
-    "semantic-release": "^19.0.3",
-    "@simpplr/polls-db-shared-npm": "^1.22.7"
+    "semantic-release": "^19.0.3"
   },
   "devDependencies": {
     "@types/express": "^4.17.21",
     "@types/luxon": "^3.4.2",
+    "@types/node": "^18.19.0",
     "@typescript-eslint/eslint-plugin": "^7.4.0",
     "@typescript-eslint/parser": "^7.4.0",
     "eslint": "^8.57.0",
-    "typescript": "^5.3.3"
+    "typescript": "^4.9.5"
   },
   "publishConfig": {
     "access": "restricted",
@@ -49,4 +49,3 @@
     "url": "git+https://github.com/Simpplr/Polls-types.git"
   }
 }
-  

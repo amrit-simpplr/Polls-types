@@ -11,15 +11,16 @@
       "module": "CommonJS",
       "moduleResolution": "Node",
       "resolveJsonModule": true,
-      "isolatedModules": true,
+      "isolatedModules": false,
       "declaration": true,
-      "target": "es2015", // or a more recent ecmascript version
+      "target": "ES2015",
+      "lib": ["ES2015", "ES2016", "ES2017", "ES2018", "ES2019", "ES2020"],
       "experimentalDecorators": true,
       "emitDecoratorMetadata": true,
-
       "outDir": "./dist"
     },
     "include": [
+      "./index.ts",
       "./api.ts",
       "./polls-be/src/**/*.ts",
       "./polls-response/src/**/*.ts"

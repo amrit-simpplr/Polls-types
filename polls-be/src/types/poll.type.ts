@@ -68,58 +68,6 @@ export type PollCreatorDBType = {
   img: string;
 };
 
-export type PollOptionType = {
-  optionId: string;
-  title: string;
-  displayOrder: number;
-  totalResponses: number | null;
-  users: {
-    id: string;
-    fullName: string;
-    profileUrl: string;
-  }[];
-};
-
-export type PollQuestionType = {
-  questionId: string;
-  title: string;
-  multipleResponses: boolean;
-  pollOptions: PollOptionType[];
-};
-
-export type PollSettingsType = {
-  isAnonymous: boolean;
-  allowResult: boolean;
-  allowResultBeforeResponse: boolean;
-	participationWindowDateType: ParticipationWindowDateType | null;
-};
-
-export type PollDetailsType = {
-  id: string;
-  title: string;
-  description: string | null;
-  deliveryType: PollDeliveryType;
-	userPrompt: string | null;
-  createdAt: Date;
-  endsAt: Date | null;
-  totalResponses: number;
-  questions: PollQuestionType[];
-  settings: PollSettingsType;
-  createdByUser: CommonUser;
-  audienceIds: string[];
-  redisTtl: number;
-  state?: PollState;
-};
-
-export type CommonUser = {
-  id: string;
-  firstName: string;
-  lastName: string;
-  name: string;
-  img: string;
-  language?: string;
-};
-
 export type GeoLocationUserDetails = {
   city?: string;
   state?: string;
@@ -157,38 +105,87 @@ export type PollListingType = {
   canManage?: boolean;
   canParticipate?: boolean;
   confidentialThresholdMet: boolean;
-  state: string;
-  description: string;
+  state: PollState;
+  description: string | null;
   questions: PollListingQuestionType[];
-  settings: PollSettingsType;
-  totalResponses: number | null;
-  createdByUser: UserType;
-  createdAt: Date;
-  endsAt: Date;
+  createdByUser: PollCreatorDBType;
   audienceIds: string[];
-  isExpired: boolean;
-};
-
-export type PollListingPollOptionType = {
-  title: string;
-  optionId: string;
-  isSelected: boolean;
-  totalResponses: number | null;
-  users: UserType[];
+  createdAt: Date;
+  endsAt: Date | null;
+  totalResponses: number;
+  redisTtl: number;
 };
 
 export type PollListingQuestionType = {
-  title: string;
   questionId: string;
-  isResponded: boolean;
+  title: string;
   multipleResponses: boolean;
   pollOptions: PollListingPollOptionType[];
 };
 
-export type UserType = {
+export type PollListingPollOptionType = {
+  optionId: string;
+  title: string;
+  displayOrder: number;
+  totalResponses: number | null;
+  users: {
+    id: string;
+    fullName: string;
+    profileUrl: string;
+  }[];
+};
+
+export type PollListingUserType = {
   id: string;
   fullName: string;
   profileUrl: string;
+};
+
+export type PollListingFilterType = {
+  searchTerm?: string;
+  creator?: string[];
+  state?: PollState[];
+  sortOrder?: 'asc' | 'desc';
+  audienceIds?: string[];
+  pollId?: string;
+};
+
+export type PollListingSortType = {
+  field: 'createdAt' | 'endsAt' | 'totalResponses';
+  order: 'asc' | 'desc';
+};
+
+export type PollListingPaginationType = {
+  page: number;
+  pageSize: number;
+  totalRecords: number;
+  totalPages: number;
+};
+
+export type PollListingResponseType = {
+  polls: PollListingType[];
+  pagination: PollListingPaginationType;
+  filters: PollListingFilterType;
+  sort: PollListingSortType;
+};
+
+export type PollListingSearchType = {
+  searchTerm?: string;
+  creator?: string[];
+  state?: PollState[];
+  sortOrder?: 'asc' | 'desc';
+  audienceIds?: string[];
+  pollId?: string;
+  page?: number;
+  pageSize?: number;
+};
+
+export type PollListingSearchResponseType = {
+  polls: PollListingType[];
+  pagination: PollListingPaginationType;
+  filters: PollListingFilterType;
+  sort: PollListingSortType;
+  search: PollListingSearchType;
 };
 
 export type UserParticipationRedisType = {

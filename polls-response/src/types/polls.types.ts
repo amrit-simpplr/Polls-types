@@ -2,15 +2,7 @@ import {
   PollDeliveryType,
   PollState,
 } from "@simpplr/polls-db-shared-npm/prisma/generated/client";
-
-export type CommonUser = {
-  id: string;
-  firstName: string;
-  lastName: string;
-  name: string;
-  img: string;
-  language: string;
-};
+import { CommonUser, UserType } from "../../../common-types/poll-common.type";
 
 export type PollDetailsQuestionsType = [
   {
@@ -29,46 +21,6 @@ export type PollListing = {
   state: PollState;
 };
 
-export type PollOptionType = {
-  optionId: string;
-  title: string;
-  displayOrder: number;
-  totalResponses: number;
-  users: {
-    id: string;
-    fullName: string;
-    profileUrl: string;
-  }[];
-};
-
-export type PollQuestionType = {
-  questionId: string;
-  title: string;
-  multipleResponses: boolean;
-  pollOptions: PollOptionType[];
-};
-
-export type PollSettingsType = {
-  isAnonymous: boolean;
-  allowResult: boolean;
-  allowResultBeforeResponse: boolean;
-};
-
-export type PollDetailsType = {
-  id: string;
-  title: string;
-  description: string;
-  deliveryType: PollDeliveryType;
-  createdAt: Date;
-  endsAt: Date;
-  totalResponses: number;
-  questions: PollQuestionType[];
-  settings: PollSettingsType;
-  createdByUser: CommonUser;
-  audienceIds: string[];
-  redisTtl: number;
-};
-
 export type PollListingPollOptionType = {
   title: string;
   optionId: string;
@@ -85,12 +37,6 @@ export type PollListingQuestionType = {
   pollOptions: PollListingPollOptionType[];
 };
 
-export type UserType = {
-  id: string;
-  fullName: string;
-  profileUrl: string;
-};
-
 export type PollListingType = {
   pollId: string;
   canManage?: boolean;
@@ -98,14 +44,12 @@ export type PollListingType = {
   state: string;
   description: string;
   questions: PollListingQuestionType[];
-  settings: PollSettingsType;
-  totalResponses: number;
-  createdByUser: UserType;
+  createdByUser: CommonUser;
+  audienceIds: string[];
   createdAt: Date;
   endsAt: Date;
-  audienceIds: string[];
+  totalResponses: number | null;
   isExpired: boolean;
-  confidentialThresholdMet: boolean;
 };
 
 export type UserPollParticipationType = {
