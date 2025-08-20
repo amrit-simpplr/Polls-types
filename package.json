@@ -2,11 +2,8 @@
   "name": "polls-types",
   "version": "1.0.0",
   "description": "Unified repository for Polls Backend Types and Polls Response Types",
-  "private": true,
-  "workspaces": [
-    "polls-be-types",
-    "polls-response-types"
-  ],
+  "main": "./index.ts",
+  "type": "module",
   "scripts": {
     "build": "tsc -p tsconfig.json",
     "build:docs": "npm run generate && npx @redocly/cli build-docs ./dist/api.json && mv redoc-static.html ./dist/index.html",
