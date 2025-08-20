@@ -17,3 +17,4 @@ export type { GetPollById } from './endpoints/GetPollById';
 export type { GetPollResults } from './endpoints/GetPollResults';
 export type { GetPollResultsByOptionId } from './endpoints/GetPollResultsByOptionId';
 export type { GetPollCsv } from './endpoints/GetPollCsv';
+
